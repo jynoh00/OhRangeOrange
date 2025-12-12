@@ -16,15 +16,31 @@
 
 
 ## 2. 프로젝트 구조 (Project Architecture)
-
-
-## 추가 수정 필요
 ```bash
-1. public에 임시로 구현한 기능, src 내부 백엔드에서 진행 (refactoring)
-
-2. 순위 등록 기능 추가 (DB 사용)
-
-3. 사운드 효과 추가
-
-4. 결과 출력 시 크기 설명 변경
+├── public
+│   ├── css
+│   │   ├── game.css
+│   │   └── index.css
+│   ├── img
+│   └── js
+│       ├── game.js
+│       └── index.js
+...
+├── src
+│   ├── app.js
+│   ├── config
+│   ├── controllers
+│   │   └── gameController.js
+│   ├── middleWare
+│   ├── models
+│   │   └── gameState.js
+│   ├── routes
+│   │   ├── error.js
+│   │   ├── game.js
+│   │   └── index.js
+│   ├── utils
+│   └── views
+│       ├── error.ejs
+│       ├── game.ejs
+│       └── index.ejs
 ```
