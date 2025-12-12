@@ -6,9 +6,4 @@ router.get('/', (req, res) => {
     res.render('index');
 });
 
-router.get('/game', (req, res) => {
-    console.log('Router(index): game.ejs render');
-    res.render('game');
-})
-
 module.exports = router;
