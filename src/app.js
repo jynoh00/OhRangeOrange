@@ -1,6 +1,8 @@
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, './config/.env') });
+
 const express = require('express');
 const session = require('express-session');
-const path = require('path');
 
 const indexRouter = require('./routes/index');
 const gameRouter = require('./routes/game');
@@ -9,7 +11,7 @@ const errorRouter = require('./routes/error');
 const app = express();
 
 app.use(session({
-    secret: 'secret-key', // 환경변수로 세션 ID 암호화 용 개인 키 (64자 이상 문자열로 작성할 것 (영문 숫자 특수문자))
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
