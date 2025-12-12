@@ -56,6 +56,7 @@ const startGaugeAnimation = () => {
 
         localState.currentValue = value;
         updateGaugePosition(value);
+
         localState.animationFrame = requestAnimationFrame(animate);
     };
 
@@ -72,6 +73,8 @@ const updateOrangeSize = size => orangeIcon.style.fontSize = size + 'px';
 const stopGauge = async () => {
     if (!localState.isMoving) return;
 
+    const stoppedValue = localState.currentValue;
+
     localState.isMoving = false;
     cancelAnimationFrame(localState.animationFrame);
     gaugeLine.classList.add('stopped');
@@ -83,6 +86,9 @@ const stopGauge = async () => {
             headers: {
                 'Content-Type': 'application/json',
             },
+            body: JSON.stringify({
+                stoppedValue: stoppedValue,
+            }),
         });
 
         const data = await response.json();
@@ -92,17 +98,31 @@ const stopGauge = async () => {
             return;
         }
 
-        messageText.textContent = data.message || '오류가 발생하였습니다';
+        /* 이 부분 삭제 해도 될 것 같은데*/
+        // messageText.textContent = data.message || '오류가 발생하였습니다';
+        // controlButton.disabled = false;
+        // localState.isMoving = true;
+        // gaugeLine.classList.remove('stopped');
+        // startGaugeAnimation();
 
     } catch (error) {
         console.error('Gauge stop Error: ', error);
         messageText.textContent = '서버 통신 중 오류가 발생하였습니다';
+        
+        /* 이 부분도 이상 */
+        // controlButton.disabled = false;
+        // localState.isMoving = true;
+        // gaugeLine.classList.remove('stopped');
+        // startGaugeAnimation();
     }
 };
 
 const handleStopResult = result => {
     // check! stoppedValue 미사용
     const { stoppedValue, success, gameOver, message, icon, orangeSize, fillWidth } = result;
+
+    // 추후 delete
+    console.log(`stoppedValue by Server: ${stoppedValue}`);
 
     gaugeFill.style.width = fillWidth + '%';
 
@@ -123,7 +143,10 @@ const handleStopResult = result => {
             setTimeout(() => orangeIcon.classList.remove('grow'), 500);
         }
 
-        setTimeout(() => restartGauge(), 800);
+        setTimeout(() => {
+            restartGauge();
+            gaugeLine.classList.remove('stopped');
+        }, 800);
     }
 };
 
