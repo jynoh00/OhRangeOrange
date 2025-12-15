@@ -226,6 +226,16 @@ constructor(sessionId) {
    - **해결**: express-session 라이브러리를 활용하여, 사용자가 게임을 시작할 때 sessionId를 생성하여 map 자료구조 방식으로 session에 gameState 객체를 매핑시켜 sesisonId에 따라 검증하고 객체를 가져오는 방식으로 다중 사용자일 경우의 gameState 객체 생성 문제를 해결하였습니다.
 
 
+## 배경 음악 저작권
+<img id="wrtImg" src="https://gongu.copyright.or.kr/gongu/wrt/cmmn/wrtFileImageView.do?wrtSn=13048800&amp;filePath=L2Rpc2sxL25ld2RhdGEvMjAxNy85OC9DTFMyL0NOVFJfVFJFQVNVUkVfSFVOVF8yMDE3MDgwOF84MV9NUDM=&amp;thumbAt=Y&amp;thumbSe=b_tbumb&amp;wrtTy=10002">
+<p style="font-size: 0.9rem;font-style: italic;">
+<span>title : <a href="http://uci.or.kr/G905-13048800"> Tong tong (통통)</a>
+authr : <a href="http://uci.or.kr/G905-13048800"> 이혜린</a>by
+site : <a href="https://gongu.copyright.or.kr/gongu/main/main.do">공유마당 저작권 위원회</a></span> <br>
+is licensed under<!-- CCL(BY) -->
+<img src="https://gongu.copyright.or.kr/static/gongu/img/common/img_license21.png" alt="CC BY[저작권정보 표시] " class="img_cc">
+<span class="fc_orange">이혜린 </span>의 "Tong tong (통통)" 은 <span class="fc_orange">CC BY</span>  라이선스로 제공됩니다.
+</p>
 
 ## 👤 개발자
 
