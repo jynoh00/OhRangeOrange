@@ -7,6 +7,25 @@ const gaugeValue = document.querySelector('.gauge-value');
 const controlButton = document.querySelector('.control-button');
 const gameOverOverlay = document.querySelector('.game-over-overlay');
 
+const frame = document.getElementById("bgm-frame");
+
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+const playClickSound = () => {
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+
+    oscillator.frequency.value = 800; // Hz
+    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.1);
+};
+
 const localState = {
     isMoving: false,
     currentValue: 0,
@@ -72,6 +91,8 @@ const updateOrangeSize = size => orangeIcon.style.fontSize = size + 'px';
 
 const stopGauge = async () => {
     if (!localState.isMoving) return;
+
+    playClickSound();
 
     const stoppedValue = localState.currentValue;
 
@@ -152,7 +173,7 @@ const handleStopResult = result => {
 
 const showGameOver = result => {
     document.querySelector('.game-over h2').textContent = result.message;
-    document.querySelector('.final-size').textContent = `최종 오렌지 크기: ${result.finalSize}rem`;
+    document.querySelector('.final-size').textContent = `최종 오렌지 크기: ${result.finalSize}`;
     document.querySelector('.attempts').textContent = `시도 횟수: ${result.attempts}`;
     gameOverOverlay.classList.add('show');
 };
@@ -184,6 +205,7 @@ const restartGauge = async () => {
 controlButton.addEventListener('click', stopGauge);
 document.addEventListener('keydown', e => {
     if (e.code === 'Space' && !controlButton.disabled) {
+        frame.contentWindow.postMessage("PLAY_BGM", "*");
         e.preventDefault();
         stopGauge();
     }

@@ -6,4 +6,8 @@ router.get('/', (req, res) => {
     res.render('index');
 });
 
+router.get('/bgm', (req, res) => {
+  res.render('bgm');
+});
+
 module.exports = router;
