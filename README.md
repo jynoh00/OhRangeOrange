@@ -17,12 +17,11 @@
 
 ## ✨ 주요 기능
 
-- 🎯 **타이밍 게임**:
-- 🌱 **성장 시스템**: 
-- 📊 **점수 시스템**: 
-- 🔊 **효과음**: 
-- 🎨 **반응형 디자인**: 
-- 🔒 **서버 검증**: 
+- 🎯 **타이밍 게임**: 움직이는 게이지에서 타이밍에 맞게 버튼을 클릭 or 스페이스바를 눌러 이전 값과 비교합니다.
+- 🌱 **성장 시스템**: 타이밍에 맞게 눌렀다면 오렌지의 크기가 커지며, 다시 게이지가 움직입니다.
+- 📊 **점수 시스템**: 이전 값보다 적은 값의 버튼을 누를 경우 최종적으로 오렌지 크기에 따라 점수가 나타납니다.
+- 🔊 **효과음**: 오실레이터 기반 사운드로 버튼 클릭 시 소리가 재생됩니다.
+- 🔒 **서버 검증**: 사용자 세션ID에 따른 게임의 상태를 분류하여, 올바른 입력 값을 서버에서 검증합니다.
 
 ## 🛠 기술 스택
 
@@ -82,14 +81,12 @@ orange-growing-game/
 │   ├── config/                # 설정 파일
 │   ├── controllers/
 │   │   └── gameController.js  # 게임 API 로직
-│   ├── middleware/            # 커스텀 미들웨어
 │   ├── models/
 │   │   └── gameState.js       # 게임 상태 관리
 │   ├── routes/
 │   │   ├── index.js           # 메인 라우트
 │   │   ├── game.js            # 게임 라우트
 │   │   └── error.js           # 에러 라우트
-│   ├── utils/                 # 유틸리티 함수
 │   └── views/
 │       ├── index.ejs          # 메인 페이지
 │       ├── game.ejs           # 게임 페이지
@@ -99,8 +96,8 @@ orange-growing-game/
 │   │   └── game.css           # 게임 스타일
 │   ├── js/
 │   │   └── game.js            # 게임 클라이언트 로직
-│   └── sounds/
-│       └── click.mp3          # 효과음 파일
+│   └── music/
+│       └── bgm.mp3          # 효과음 파일
 ├── .env                       # 환경 변수
 ├── .gitignore
 ├── package.json
@@ -224,7 +221,6 @@ constructor(sessionId) {
    - **문제**: 새 페이지가 생성될 때마다 gameState 객체를 생성할 경우, 개별 사용자마다 진행 중인 gameState 정보를 받아올 방법이 필요하였습니다.
 
    - **해결**: express-session 라이브러리를 활용하여, 사용자가 게임을 시작할 때 sessionId를 생성하여 map 자료구조 방식으로 session에 gameState 객체를 매핑시켜 sesisonId에 따라 검증하고 객체를 가져오는 방식으로 다중 사용자일 경우의 gameState 객체 생성 문제를 해결하였습니다.
-
 
 ## 배경 음악 저작권
 <img id="wrtImg" src="https://gongu.copyright.or.kr/gongu/wrt/cmmn/wrtFileImageView.do?wrtSn=13048800&amp;filePath=L2Rpc2sxL25ld2RhdGEvMjAxNy85OC9DTFMyL0NOVFJfVFJFQVNVUkVfSFVOVF8yMDE3MDgwOF84MV9NUDM=&amp;thumbAt=Y&amp;thumbSe=b_tbumb&amp;wrtTy=10002">
