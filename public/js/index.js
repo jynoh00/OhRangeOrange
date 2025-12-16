@@ -1,14 +1,15 @@
-function openModal(modalId) {
+const openModal = modalId => {
     document.getElementById(modalId).classList.add('active');
-}
+};
 
-function closeModal(modalId) {
+const closeModal = modalId => {
     document.getElementById(modalId).classList.remove('active');
-}
+};
 
-function toggleOption(element) {
+const toggleOption = element => {
     element.classList.toggle('active');
-}
+};
+
 
 document.querySelectorAll('.modal').forEach(modal => {
     modal.addEventListener('click', function(e) {
